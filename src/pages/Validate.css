@@ -199,3 +199,53 @@
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
+
+
+
+
+/* New */
+
+.agent-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 18, 21, 0.9); display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.agent-brain-card {
+  background: #0a1f23; border: 1px solid #00f2ff; padding: 2rem; width: 500px;
+  border-radius: 8px; box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+}
+.brain-header { color: #00f2ff; border-bottom: 1px solid #333; margin-bottom: 1rem; padding-bottom: 0.5rem; }
+.step-entry { color: #fff; font-family: 'Courier New', Courier, monospace; margin: 10px 0; }
+.typing-animation { overflow: hidden; white-space: nowrap; border-right: 2px solid #00f2ff; animation: typing 1s steps(40, end); }
+@keyframes typing { from { width: 0 } to { width: 100% } }
+
+.agent-brain-card {
+  background: #0a1f23;
+  border: 1px solid #00f2ff;
+  padding: 2rem;
+  width: 90%; 
+  max-width: 550px; 
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00f2ff }
+}
+
+/* .typing-animation {
+  display: block;
+  overflow: hidden;
+  border-right: 2px solid #00f2ff;
+  white-space: normal;
+  width: fit-content;
+  max-width: 100%;
+  animation: blink-caret 0.75s step-end infinite;
+}
+.step-entry {
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.4;
+} */

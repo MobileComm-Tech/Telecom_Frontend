@@ -28,7 +28,27 @@ export default function History() {
     fetchData()
   }, [])
 
-  const CATS = ['ALL', 'S1', 'S2', 'S3', 'S4', 'S5']
+
+  const downloadHistoryPDF = async (id,category,category_full_name) => {
+    try {
+      // const res = await axios.post(`${API}/report/generate`, {
+      //   result: record.result_json,
+      //   image: record.real_image,
+      // }, { responseType: 'blob' });
+      const res = await axios.get(`${API}/report/generate/${id}`, {responseType: 'blob'});
+
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Report_${category}_${category_full_name}.pdf`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      alert('Failed to download report. Make sure backend is running.');
+    }
+  };
+
+  const CATS = ['ALL']
   const filtered = filter === 'ALL'
     ? validations
     : validations.filter(v => v.category === filter)
@@ -92,11 +112,13 @@ export default function History() {
               <tr>
                 <th className="mono">ID</th>
                 <th>Category</th>
-                <th>Filename</th>
-                <th>Result</th>
-                <th className="mono">Similarity</th>
-                <th>Confidence</th>
+                {/* <th>Filename</th> */}
+                <th>Tool Result</th>
+                <th>User Result</th>
+                <th>User Remars</th>
+                <th>UST ID</th>
                 <th className="mono">Date</th>
+                {/* <th >Report</th> */}
               </tr>
             </thead>
             <tbody>
@@ -106,17 +128,29 @@ export default function History() {
                   <td>
                     <span className="badge badge-pass mono">{v.category}</span>
                   </td>
-                  <td className="filename-cell">{v.filename}</td>
+                  
                   <td>
-                    <span className={`badge badge-${v.result === 'PASS' ? 'pass' : 'fail'}`}>
-                      {v.result}
+                    <span className={`badge badge-${v.result_json.success === 'PASS' ? 'pass' : 'fail'}`}>
+                      {v.result_json.success}
                     </span>
                   </td>
-                  <td className="mono">{v.similarity_score}%</td>
-                  <td style={{ color: 'var(--text-dim)', fontSize: '0.82rem' }}>{v.confidence}</td>
+                  <td className="filename-cell">{v.result}</td>
+                  <td className="filename-cell">{v.remarks}</td>
+                  <td className="filename-cell">{v.uid}</td>
                   <td className="mono" style={{ color: 'var(--text-dim)', fontSize: '0.75rem' }}>
                     {new Date(v.created_at).toLocaleString()}
                   </td>
+
+                  {/* <td className="action-cell">
+                    <button 
+                      className="btn-icon-download" 
+                      onClick={() => downloadHistoryPDF(v.id,v.category,v.category_full_name)}
+                      title="Download PDF"
+                    >
+                      <span style={{ fontSize: '1.2rem', cursor: 'pointer' }}>📥</span>
+                    </button>
+                  </td> */}
+
                 </tr>
               ))}
             </tbody>
