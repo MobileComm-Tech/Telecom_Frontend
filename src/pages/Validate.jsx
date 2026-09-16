@@ -6,13 +6,27 @@ import './Validate.css'
 const API = 'http://localhost:5000/api'
 
 const CATEGORIES = [
-  // { id: 'S1', name: 'Cabinet Mounting & Accessibility',          icon: '🏗️',  desc: 'Cabinet properly mounted, secured & accessible' },
+  { id: 'S1', name: 'Cabinet Mounting & Accessibility', icon: '🏗️',  desc: 'Cabinet properly mounted, secured & accessible' },
   // { id: 'S2', name: 'IP55 Cabinet Filter',                       icon: '🔲',  desc: 'Filter in place, clean & properly fitted' },
-  // { id: 'S3', name: 'Base Station Installation',                  icon: '📡',  desc: 'Secure install, perfect horizontal/vertical position' },
-  // { id: 'S4', name: 'IP Seals & Plugs',                          icon: '🔌',  desc: 'IP seals/plugs installed in all modules' },
+  { id: 'S3', name: 'Base Station Installation',                  icon: '📡',  desc: 'Secure install, perfect horizontal/vertical position' },
+  { id: 'S4', name: 'IP Seals & Plugs',                          icon: '🔌',  desc: 'IP seals/plugs installed in all modules' },
   { id: 'S5', name: 'RRU — GND Jumper, Weatherproofing & Label', icon: '⚡',  desc: 'GND jumper clamping, weatherproofing & labeling' },
-  // { id: 'S5_A2', name: 'RRU — GND Jumper, Weatherproofing & Label', icon: '⚡',  desc: 'GND jumper clamping, weatherproofing & labeling' },
-  // { id: 'S5_A3', name: 'RRU — GND Jumper, Weatherproofing & Label', icon: '⚡',  desc: 'GND jumper clamping, weatherproofing & labeling' },
+  { id: 'S6', name: 'BBU and DCDU', icon: '⚡',  desc: 'BBU and DCDU are grounded to EGB or Tower leg' },
+  { id: 'S7', name: 'RRU - Grounded and the Grounding Cable', icon: '⚡',  desc: 'RRU is grounded and the grounding cable of RRUs' },
+  { id: 'S8', name: 'RRU - Power Cables', icon: '⚡',  desc: 'RRU power cables are arranged in neat and straight way without any crossing' },
+  { id: 'S9', name: 'CPRI - FO Cable', icon: '⚡',  desc: 'CPRI - FO Cable looped in ring at least 2-3 times at RRU end' },
+  { id: 'S10', name: 'CPRI/eCPRI-FO Cable Extra Length', icon: '⚡',  desc: 'CPRI/eCPRI - All FO Cable extra length kept/fixed safely' },
+  { id: 'S11', name: 'CPRI/eCPRI Routing at AMOB/ACOC end', icon: '⚡',  desc: 'CPRI/eCPRI Routing at AMOB/ACOC end (Labelling should be clearly Visible)' },
+  { id: 'S12', name: 'CPRI/eCPRI connectivity at ABIx end', icon: '⚡',  desc: 'CPRI/eCPRI connectivity at ABIx end in AMOB/AMIA' },
+  { id: 'S14', name: 'Optical / Ethernet Lan cables', icon: '⚡',  desc: 'The Optical / Ethernet Lan cables are routed and connected securely at BBU' },
+
+  { id: 'S15', name: 'CPRI cables of sector RRU', icon: '⚡',  desc: 'CPRI cables of sector RRU are arranged in neat and straight way' },
+  { id: 'S18', name: 'GPS Anteena and Cable', icon: '⚡',  desc: 'GPS antenna and cable installed properly' },
+  { id: 'S20', name: 'Antenna Clamp', icon: '⚡',  desc: 'CPRI - FO Cable looped in ring at least 2-3 times at RRU end' },
+  { id: 'S21', name: 'GGSM Installation', icon: '⚡',  desc: 'GGSM Installation Showing Jumper Weather Proofing & Labeling' },
+  { id: 'S23', name: 'EMF Signage Board', icon: '⚡',  desc: 'EMF Signage Board installed and visible' },
+
+  { id: 'S26', name: 'Alarm Patch Panel', icon: '⚡',  desc: 'showing alarm extension ( Both cable from BTS and INFRA and interconnection) and labelling on both side' },
 ]
 
 export default function Validate() {
@@ -68,36 +82,36 @@ export default function Validate() {
     // S4 / S5 SPECIAL VALIDATION
     // =========================
 
-    if (category === 'S4' || category === 'S5') {
+    // if (category === 'S4' || category === 'S5') {
 
-      const requiredSubFolders = [
-        `${category}_A1`,
-        `${category}_A2`,
-        `${category}_A3`
-      ]
+    //   const requiredSubFolders = [
+    //     `${category}_A1`,
+    //     `${category}_A2`,
+    //     `${category}_A3`
+    //   ]
 
-      const detectedFolders = new Set()
+    //   const detectedFolders = new Set()
 
-      fileArray.forEach(file => {
+    //   fileArray.forEach(file => {
 
-        const parts = file.webkitRelativePath.split('/')
+    //     const parts = file.webkitRelativePath.split('/')
 
-        // S4/S4_A1/img1.jpg
+    //     // S4/S4_A1/img1.jpg
 
-        if (parts.length >= 2) {
-          detectedFolders.add(parts[1])
-        }
-      })
+    //     if (parts.length >= 2) {
+    //       detectedFolders.add(parts[1])
+    //     }
+    //   })
 
-      const missing = requiredSubFolders.filter(
-        folder => !detectedFolders.has(folder)
-      )
+    //   const missing = requiredSubFolders.filter(
+    //     folder => !detectedFolders.has(folder)
+    //   )
 
-      if (missing.length > 0) {
-        setError(`Missing folders: ${missing.join(', ')}`)
-        return
-      }
-    }
+    //   if (missing.length > 0) {
+    //     setError(`Missing folders: ${missing.join(', ')}`)
+    //     return
+    //   }
+    // }
 
     // Save files
     setFiles(fileArray)
@@ -366,7 +380,7 @@ export default function Validate() {
             <span className="loading-text">
               <span className="spinner" /> Analyzing...
             </span>
-          ) : 'Ask to AI →'}
+          ) : 'Azalyze →'}
         </button>
       </div>
 
@@ -375,7 +389,7 @@ export default function Validate() {
       {isProcessing && (
         <div className="agent-overlay">
           <div className="agent-brain-card">
-            <div className="brain-header mono">🤖 AGENTIC REASONING ENGINE</div>
+            <div className="brain-header mono">REASONING ENGINE</div>
             <div className="steps-list">
               {agentSteps.map((step, i) => (
                 <div key={i} className="step-entry typing-animation">

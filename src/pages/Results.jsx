@@ -422,7 +422,7 @@ export default function Results() {
 
                     </div>
 
-                    <div className="reasoning-line">
+                    {/* <div className="reasoning-line">
 
                       <span className="reasoning-label">
                         Missing Objects:
@@ -430,12 +430,33 @@ export default function Results() {
 
                       <span className="reasoning-text">
                         {
-                          agent.forbidden_found?.length > 0
-                            ? agent.forbidden_found.join(', ')
+                          agent.missing_objects?.length > 0
+                            ? agent.missing_objects.join(', ')
                             : "No Missing Object"
                         }
                       </span>
-                    </div>
+                    </div> */}
+
+                    {agent.forbidden_found?.length > 0  &&
+
+                      <div className="reasoning-line">
+                        <span className="reasoning-label">
+                          forbidden_found:
+                        </span>
+                      
+
+                        <span className="reasoning-text">
+                          {
+                            agent.forbidden_found?.length > 0
+                              ? `${agent.forbidden_found.join(', ')} is found please remove it`
+                              : ""
+                          }
+                        </span>
+                      </div>
+                    }
+                    
+
+
                   </div>
                 </div>
               </div>
@@ -472,7 +493,7 @@ export default function Results() {
                 <div className="image-box">
 
                   <span className="image-label">
-                    Upload Image
+                    Best Image
                   </span>
 
                   <img
