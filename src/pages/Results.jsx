@@ -331,9 +331,13 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './Results.css'
 
-const API = 'http://localhost:5000/api'
+// const API = 'http://localhost:5000/api'
 
-const backendassetUrl = "http://localhost:5000/api/download/"
+// const backendassetUrl = "http://localhost:5000/api/download/"
+
+const API = '/api'
+
+const backendassetUrl = "/api/download/"
 
 export default function Results() {
   const { state } = useLocation()
