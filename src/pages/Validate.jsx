@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './Validate.css'
 
-const API = 'http://localhost:8000/api'
+// const API = 'http://localhost:8000/api'
+
+
+const API = '/api'
 
 const CATEGORIES = [
   { id: 'S1', name: 'Cabinet Mounting & Accessibility', icon: '🏗️',  desc: 'Cabinet properly mounted, secured & accessible' },
