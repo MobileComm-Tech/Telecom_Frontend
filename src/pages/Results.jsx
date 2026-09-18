@@ -426,7 +426,7 @@ export default function Results() {
 
                     </div>
 
-                    {/* <div className="reasoning-line">
+                    <div className="reasoning-line">
 
                       <span className="reasoning-label">
                         Missing Objects:
@@ -439,7 +439,7 @@ export default function Results() {
                             : "No Missing Object"
                         }
                       </span>
-                    </div> */}
+                    </div>
 
                     {agent.forbidden_found?.length > 0  &&
 
